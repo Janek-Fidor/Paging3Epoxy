@@ -8,10 +8,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-private const val POKEMONS_PER_PAGE = 20
 private const val STARTING_KEY = 1
 
-class MockPokemonDataSource() : PokemonRemoteDataSource {
+class MockPokemonRemoteDataSource() : PokemonRemoteDataSource {
     override suspend fun getPokemonById(id: Int): ApiResult<NetworkPokemon> {
         return withContext(Dispatchers.IO) {
             delay(2_000L)
@@ -19,11 +18,11 @@ class MockPokemonDataSource() : PokemonRemoteDataSource {
         }
     }
 
-    override suspend fun getPokemonPageById(id: Int): ApiResult<NetworkPokemonPage> {
+    override suspend fun getPokemonPageById(id: Int, pageSize: Int): ApiResult<NetworkPokemonPage> {
         return withContext(Dispatchers.IO) {
             delay(2_000L)
-            val pokemons = List(POKEMONS_PER_PAGE) {
-                val pokemonId = (id - 1) * POKEMONS_PER_PAGE + 1 + it
+            val pokemons = List(pageSize) {
+                val pokemonId = (id - 1) * pageSize + 1 + it
                 NetworkPokemonSnapshot("Pokemon :$pokemonId", "$pokemonId/")
             }
             val prev = if (id == STARTING_KEY) "${null}/" else "${id - 1}/"

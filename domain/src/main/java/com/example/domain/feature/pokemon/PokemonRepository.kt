@@ -1,8 +1,9 @@
 package com.example.domain.feature.pokemon
 
-import com.example.domain.core.Result
-import com.example.domain.feature.pokemon.models.PokemonPage
+import androidx.paging.PagingData
+import com.example.domain.feature.pokemon.models.PokemonSnapshot
+import kotlinx.coroutines.flow.Flow
 
 interface PokemonRepository {
-    suspend fun getPokemonPageById(id: Int): Result<PokemonPage>
+    fun fetchPokemonPages(): Flow<PagingData<PokemonSnapshot>>
 }
