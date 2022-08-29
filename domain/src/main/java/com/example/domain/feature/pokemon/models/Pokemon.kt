@@ -1,4 +1,4 @@
-package com.example.domain.feature.pokemon
+package com.example.domain.feature.pokemon.models
 
 data class Pokemon(
     val id: Int,
