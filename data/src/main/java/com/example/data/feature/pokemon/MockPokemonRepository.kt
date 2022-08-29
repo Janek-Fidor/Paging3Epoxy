@@ -16,7 +16,8 @@ class MockPokemonRepository(private val dataSource: PokemonRemoteDataSource) : P
         config = PagingConfig(
             pageSize = PAGE_SIZE,
             prefetchDistance = PREFETCH_DISTANCE,
-            enablePlaceholders = false
+            enablePlaceholders = false,
+            initialLoadSize = PAGE_SIZE
         )
     ).flow
 
