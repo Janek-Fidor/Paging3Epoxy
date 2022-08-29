@@ -38,7 +38,7 @@ class FirstFragment : Fragment() {
         val epoxyController = PokemonListEpoxyController()
 
         lifecycleScope.launch {
-            viewModel.flow.collectLatest { pagingData: PagingData<PokemonSnapshot> ->
+            viewModel.pokemonFlow.collectLatest { pagingData: PagingData<PokemonSnapshot> ->
                 epoxyController.submitData(pagingData)
             }
         }
