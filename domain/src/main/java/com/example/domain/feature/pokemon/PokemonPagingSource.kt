@@ -19,22 +19,20 @@ class PokemonPagingSource(
             onError = { return LoadResult.Error(it.exception) }
         )
 
-
         return LoadResult.Page(
             data = pokemonPage.results,
             prevKey = when (id) {
                 STARTING_KEY -> null
-                else -> ensureValidKey(key = id - 1)
+                else -> id - 1
             },
-            nextKey = id + 1
+            nextKey = if(pokemonPage.next == null) null else id + 1
         )
     }
 
     override fun getRefreshKey(state: PagingState<Int, PokemonSnapshot>): Int? {
-        val anchorPosition = state.anchorPosition ?: return null
-        val pokemon = state.closestItemToPosition(anchorPosition) ?: return null
-        return ensureValidKey(key = pokemon.id - (state.config.pageSize / 2))
+        return state.anchorPosition?.let { anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+        }
     }
-
-    private fun ensureValidKey(key: Int) = max(STARTING_KEY, key)
 }
