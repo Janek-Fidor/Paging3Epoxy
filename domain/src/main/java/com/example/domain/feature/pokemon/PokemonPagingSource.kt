@@ -8,30 +8,29 @@ import java.lang.Integer.max
 private const val STARTING_KEY = 1
 
 class PokemonPagingSource(
-    private val dataSource: PokemonRemoteDataSource
-) : PagingSource<Int, Pokemon>() {
+    private val repo: PokemonRepository
+) : PagingSource<Int, PokemonSnapshot>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
-        val start = params.key ?: STARTING_KEY
-        val pokemonIdsToFetch = start.until(start + params.loadSize)
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonSnapshot> {
+        val id = params.key ?: STARTING_KEY
 
-        val pokemons = pokemonIdsToFetch.mapNotNull { id ->
-            dataSource.getPokemonById(id).execute(
-                onSuccess = { it.value }, onError = { null }
-            )
-        }
+        val pokemonPage = repo.getPokemonPageById(id).execute(
+            onSuccess = { it.value },
+            onError = { return LoadResult.Error(it.exception) }
+        )
+
 
         return LoadResult.Page(
-            data = pokemons,
-            prevKey = when (start) {
+            data = pokemonPage.results,
+            prevKey = when (id) {
                 STARTING_KEY -> null
-                else -> ensureValidKey(key = pokemonIdsToFetch.first - params.loadSize)
+                else -> ensureValidKey(key = id - 1)
             },
-            nextKey = pokemonIdsToFetch.last + 1
+            nextKey = id + 1
         )
     }
 
-    override fun getRefreshKey(state: PagingState<Int, Pokemon>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, PokemonSnapshot>): Int? {
         val anchorPosition = state.anchorPosition ?: return null
         val pokemon = state.closestItemToPosition(anchorPosition) ?: return null
         return ensureValidKey(key = pokemon.id - (state.config.pageSize / 2))
