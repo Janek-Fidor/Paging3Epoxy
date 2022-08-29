@@ -22,8 +22,9 @@ class MockPokemonDataSource() : PokemonRemoteDataSource {
     override suspend fun getPokemonPageById(id: Int): ApiResult<NetworkPokemonPage> {
         return withContext(Dispatchers.IO) {
             delay(2_000L)
-            val pokemons = List(POKEMONS_PER_PAGE) { id ->
-                NetworkPokemonSnapshot("Pokemon :$id", "")
+            val pokemons = List(POKEMONS_PER_PAGE) {
+                val pokemonId = (id - 1) * POKEMONS_PER_PAGE + 1 + it
+                NetworkPokemonSnapshot("Pokemon :$pokemonId", "$pokemonId/")
             }
             val prev = if (id == STARTING_KEY) "${null}/" else "${id - 1}/"
 
