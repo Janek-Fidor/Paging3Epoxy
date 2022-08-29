@@ -3,7 +3,6 @@ package com.example.domain.feature.pokemon
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.domain.core.execute
-import java.lang.Integer.max
 
 private const val STARTING_KEY = 1
 
@@ -25,14 +24,13 @@ class PokemonPagingSource(
                 STARTING_KEY -> null
                 else -> id - 1
             },
-            nextKey = if(pokemonPage.next == null) null else id + 1
+            nextKey = if (pokemonPage.next == null) null else id + 1
         )
     }
 
-    override fun getRefreshKey(state: PagingState<Int, PokemonSnapshot>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
+    override fun getRefreshKey(state: PagingState<Int, PokemonSnapshot>): Int? =
+        state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
-    }
 }
