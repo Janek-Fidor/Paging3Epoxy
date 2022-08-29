@@ -3,6 +3,7 @@ package com.example.domain.feature.pokemon
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.domain.core.execute
+import com.example.domain.feature.pokemon.models.PokemonSnapshot
 
 private const val STARTING_KEY = 1
 

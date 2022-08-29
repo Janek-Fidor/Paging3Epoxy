@@ -1,6 +1,6 @@
-package com.example.domain.feature.pokemon
+package com.example.data.feature.pokemon.models
 
-data class PokemonSnapshot(
+data class NetworkPokemonSnapshot(
     val name: String,
     val url: String
 ) {
