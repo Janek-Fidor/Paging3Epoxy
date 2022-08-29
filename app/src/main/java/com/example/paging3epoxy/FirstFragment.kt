@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
-import com.example.data.feature.pokemon.PokemonViewModel
 import com.example.domain.feature.pokemon.models.PokemonSnapshot
 import com.example.paging3epoxy.databinding.FragmentFirstBinding
 import kotlinx.coroutines.flow.collectLatest
