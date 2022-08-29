@@ -34,16 +34,15 @@ class FirstFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        super.onViewCreated(view, savedInstanceState)
         val epoxyController = PokemonListEpoxyController()
+        binding.epoxyRecyclerView.setController(epoxyController)
 
         lifecycleScope.launch {
-            viewModel.pokemonFlow.collectLatest { pagingData: PagingData<PokemonSnapshot> ->
+            viewModel.pokemonFlow.collect { pagingData: PagingData<PokemonSnapshot> ->
                 epoxyController.submitData(pagingData)
             }
         }
-
-        binding.epoxyRecyclerView.setController(epoxyController)
     }
 
     override fun onDestroyView() {
