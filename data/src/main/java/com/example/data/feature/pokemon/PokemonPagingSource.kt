@@ -14,6 +14,7 @@ class PokemonPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonSnapshot> {
         val id = params.key ?: STARTING_KEY
         val apiResult = dataSource.getPokemonPageById(id, params.loadSize)
+
         return when (apiResult) {
             is ApiResult.Success -> LoadResult.Page(
                 data = apiResult.value.mapToDomain().results,
