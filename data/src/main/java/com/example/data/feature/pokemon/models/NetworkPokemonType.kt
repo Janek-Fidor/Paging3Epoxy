@@ -3,11 +3,12 @@ package com.example.data.feature.pokemon.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NetworkPokemonAbility(
+data class NetworkPokemonType(
     val name: String
 )
 
+
 @Serializable
-data class NetworkPokemonAbilitySlot(
-    val ability: NetworkPokemonAbility
+data class NetworkPokemonTypeSlot(
+    val type: NetworkPokemonType
 )

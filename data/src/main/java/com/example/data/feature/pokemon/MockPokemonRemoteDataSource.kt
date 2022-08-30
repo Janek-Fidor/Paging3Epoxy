@@ -4,6 +4,7 @@ import com.example.data.core.ApiResult
 import com.example.data.feature.pokemon.models.NetworkPokemon
 import com.example.data.feature.pokemon.models.NetworkPokemonPage
 import com.example.data.feature.pokemon.models.NetworkPokemonSnapshot
+import com.example.data.feature.pokemon.models.NetworkPokemonSprites
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -11,10 +12,10 @@ import kotlinx.coroutines.withContext
 private const val STARTING_KEY = 1
 
 class MockPokemonRemoteDataSource() : PokemonRemoteDataSource {
-    override suspend fun getPokemonById(id: Int): ApiResult<NetworkPokemon> {
+    override suspend fun getPokemonByName(name: String): ApiResult<NetworkPokemon> {
         return withContext(Dispatchers.IO) {
             delay(2_000L)
-            ApiResult.Success(NetworkPokemon(id, "", "", "", emptyList()))
+            ApiResult.Success(NetworkPokemon(0, "", NetworkPokemonSprites(""), emptyList(), emptyList()))
         }
     }
 

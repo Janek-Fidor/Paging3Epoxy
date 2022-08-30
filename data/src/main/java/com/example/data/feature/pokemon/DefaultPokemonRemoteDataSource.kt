@@ -32,8 +32,8 @@ class DefaultPokemonRemoteDataSource : PokemonRemoteDataSource {
 
     private val pokemonService by lazy { retrofit.create(PokemonApiService::class.java) }
 
-    override suspend fun getPokemonById(id: Int): ApiResult<NetworkPokemon> =
-        safeApiCall { pokemonService.getPokemonById(id) }
+    override suspend fun getPokemonByName(name: String): ApiResult<NetworkPokemon>
+        = safeApiCall { pokemonService.getPokemonByName(name) }
 
     override suspend fun getPokemonPageById(limit: Int, offset: Int): ApiResult<NetworkPokemonPage> =
         safeApiCall { pokemonService.getPokemonPageById(limit, offset) }
