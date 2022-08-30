@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
-import com.example.domain.feature.pokemon.models.PokemonSnapshot
+import com.example.domain.feature.pokemon.models.Pokemon
 import com.example.paging3epoxy.databinding.FragmentFirstBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -40,7 +40,7 @@ class FirstFragment : Fragment() {
         binding.epoxyRecyclerView.setController(epoxyController)
 
         lifecycleScope.launch {
-            viewModel.pokemonFlow.collect { pagingData: PagingData<PokemonSnapshot> ->
+            viewModel.pokemonFlow.collect { pagingData: PagingData<Pokemon> ->
                 epoxyController.submitData(pagingData)
             }
         }
