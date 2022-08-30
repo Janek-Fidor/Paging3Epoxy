@@ -10,11 +10,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
 import com.example.domain.feature.pokemon.models.PokemonSnapshot
 import com.example.paging3epoxy.databinding.FragmentFirstBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
+@AndroidEntryPoint
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
