@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.paging3epoxy">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".PokemonApp"
         android:allowBackup="true"
