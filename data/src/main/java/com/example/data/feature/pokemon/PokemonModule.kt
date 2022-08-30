@@ -12,9 +12,9 @@ object PokemonModule {
 
     @Provides
     fun provideRemoteDataSource(): PokemonRemoteDataSource =
-        MockPokemonRemoteDataSource()
+        DefaultPokemonRemoteDataSource()
 
     @Provides
     fun provideRepository(dataSource: PokemonRemoteDataSource): PokemonRepository =
-        MockPokemonRepository(dataSource)
+        DefaultPokemonRepository(dataSource)
 }
