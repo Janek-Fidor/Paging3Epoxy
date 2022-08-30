@@ -13,8 +13,8 @@ interface PokemonApiService {
         @Query("offset") offset: Int
     ): NetworkPokemonPage
 
-    @GET("pokemon/{id}")
-    suspend fun getPokemonById(
-        @Path("id") id: Int,
+    @GET("pokemon/{name}")
+    suspend fun getPokemonByName(
+        @Path("name") name: String,
     ): NetworkPokemon
 }
