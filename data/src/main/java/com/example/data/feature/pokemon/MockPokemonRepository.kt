@@ -8,8 +8,8 @@ import com.example.domain.feature.pokemon.models.PokemonSnapshot
 import kotlinx.coroutines.flow.Flow
 
 
-private const val VISIBLE_PAGE_SIZE = 12
-private const val PAGE_SIZE = VISIBLE_PAGE_SIZE * 3
+private const val VISIBLE_PAGE_SIZE = 20
+private const val PAGE_SIZE = VISIBLE_PAGE_SIZE * 2
 private const val PREFETCH_DISTANCE = PAGE_SIZE * 2
 
 class MockPokemonRepository(private val dataSource: PokemonRemoteDataSource) : PokemonRepository {

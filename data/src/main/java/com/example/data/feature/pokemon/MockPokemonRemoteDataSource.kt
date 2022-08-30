@@ -18,16 +18,16 @@ class MockPokemonRemoteDataSource() : PokemonRemoteDataSource {
         }
     }
 
-    override suspend fun getPokemonPageById(id: Int, pageSize: Int): ApiResult<NetworkPokemonPage> {
+    override suspend fun getPokemonPageById(limit: Int, offset: Int): ApiResult<NetworkPokemonPage> {
         return withContext(Dispatchers.IO) {
             delay(2_000L)
-            val pokemons = List(pageSize) {
-                val pokemonId = (id - 1) * pageSize + 1 + it
+            val pokemons = List(limit) {
+                val pokemonId = offset + 1 + it
                 NetworkPokemonSnapshot("Pokemon :$pokemonId", "$pokemonId/")
             }
-            val prev = if (id == STARTING_KEY) "${null}/" else "${id - 1}/"
+            val prev = if (offset == 0) "${null}/" else "${offset - limit}/"
 
-            ApiResult.Success(NetworkPokemonPage(prev, "${id + 1}/", pokemons))
+            ApiResult.Success(NetworkPokemonPage(prev, "${offset + limit}/", pokemons))
         }
     }
 }
