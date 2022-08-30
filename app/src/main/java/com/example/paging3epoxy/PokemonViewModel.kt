@@ -1,11 +1,15 @@
 package com.example.paging3epoxy
 
 import androidx.lifecycle.ViewModel
-import com.example.data.feature.pokemon.MockPokemonRemoteDataSource
-import com.example.data.feature.pokemon.MockPokemonRepository
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
+import com.example.domain.feature.pokemon.PokemonRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class PokemonViewModel : ViewModel() {
-
-    private val repository = MockPokemonRepository(MockPokemonRemoteDataSource())
-    val pokemonFlow = repository.fetchPokemonPages()
+@HiltViewModel
+class PokemonViewModel @Inject constructor(
+    repository: PokemonRepository
+) : ViewModel() {
+    val pokemonFlow = repository.fetchPokemonPages().cachedIn(viewModelScope)
 }
