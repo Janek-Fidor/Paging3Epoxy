@@ -1,5 +1,6 @@
 package com.example.data.feature.pokemon
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.data.core.ApiResult
@@ -26,7 +27,10 @@ class PokemonPagingSource(
                 },
                 nextKey = if (apiResult.value.next == null) null else id + 1
             )
-            is ApiResult.Error -> LoadResult.Error(apiResult.exception)
+            is ApiResult.Error -> {
+                Log.e("paging exception", apiResult.exception.toString())
+                LoadResult.Error(apiResult.exception)
+            }
         }
     }
 
