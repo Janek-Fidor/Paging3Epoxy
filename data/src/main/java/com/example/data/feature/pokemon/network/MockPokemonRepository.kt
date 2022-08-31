@@ -1,13 +1,11 @@
-package com.example.data.feature.pokemon
+package com.example.data.feature.pokemon.network
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.map
 import com.example.domain.feature.pokemon.PokemonRepository
 import com.example.domain.feature.pokemon.models.Pokemon
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 
 private const val VISIBLE_PAGE_SIZE = 20

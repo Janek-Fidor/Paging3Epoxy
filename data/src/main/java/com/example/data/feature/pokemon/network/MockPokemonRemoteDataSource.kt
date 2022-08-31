@@ -1,4 +1,4 @@
-package com.example.data.feature.pokemon
+package com.example.data.feature.pokemon.network
 
 import com.example.data.core.ApiResult
 import com.example.data.feature.pokemon.models.NetworkPokemon
@@ -9,17 +9,26 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-private const val STARTING_KEY = 1
-
-class MockPokemonRemoteDataSource() : PokemonRemoteDataSource {
+class MockPokemonRemoteDataSource : PokemonRemoteDataSource {
     override suspend fun getPokemonByName(name: String): ApiResult<NetworkPokemon> {
         return withContext(Dispatchers.IO) {
             delay(2_000L)
-            ApiResult.Success(NetworkPokemon(0, "", NetworkPokemonSprites(""), emptyList(), emptyList()))
+            ApiResult.Success(
+                NetworkPokemon(
+                    0,
+                    "",
+                    NetworkPokemonSprites(""),
+                    emptyList(),
+                    emptyList()
+                )
+            )
         }
     }
 
-    override suspend fun getPokemonPageById(limit: Int, offset: Int): ApiResult<NetworkPokemonPage> {
+    override suspend fun getPokemonPageById(
+        limit: Int,
+        offset: Int
+    ): ApiResult<NetworkPokemonPage> {
         return withContext(Dispatchers.IO) {
             delay(2_000L)
             val pokemons = List(limit) {
