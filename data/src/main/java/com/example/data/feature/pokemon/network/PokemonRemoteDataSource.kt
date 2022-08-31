@@ -1,4 +1,4 @@
-package com.example.data.feature.pokemon
+package com.example.data.feature.pokemon.network
 
 import com.example.data.core.ApiResult
 import com.example.data.feature.pokemon.models.NetworkPokemon

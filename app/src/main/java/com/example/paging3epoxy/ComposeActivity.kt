@@ -49,11 +49,11 @@ class ComposeActivity : ComponentActivity() {
 fun PokemonListScreen(
     viewModel: PokemonViewModel = hiltViewModel()
 ) {
-//    val pokemonPagingData = viewModel.pokemonFlow
-//    PokemonListEpoxy(pokemonPagingData)
+    val pokemonPagingData = viewModel.pokemonFlow
+    PokemonListEpoxy(pokemonPagingData)
 
-    val pokemonPagingItems = viewModel.pokemonFlow.collectAsLazyPagingItems()
-    PokemonListCompose(pokemonPagingItems)
+//    val pokemonPagingItems = viewModel.pokemonFlow.collectAsLazyPagingItems()
+//    PokemonListCompose(pokemonPagingItems)
 }
 
 @Composable

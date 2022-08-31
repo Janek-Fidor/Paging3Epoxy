@@ -1,5 +1,8 @@
 package com.example.data.feature.pokemon
 
+import com.example.data.feature.pokemon.network.DefaultPokemonRemoteDataSource
+import com.example.data.feature.pokemon.network.DefaultPokemonRepository
+import com.example.data.feature.pokemon.network.PokemonRemoteDataSource
 import com.example.domain.feature.pokemon.PokemonRepository
 import dagger.Module
 import dagger.Provides

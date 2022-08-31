@@ -1,4 +1,4 @@
-package com.example.data.feature.pokemon
+package com.example.data.feature.pokemon.network
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
