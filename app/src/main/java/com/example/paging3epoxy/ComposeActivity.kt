@@ -22,7 +22,6 @@ import androidx.core.view.setPadding
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.compose.AsyncImage
@@ -109,7 +108,7 @@ data class PokemonDetailsUIState(
 @Composable
 fun PokemonDetails(pokemonDetails: PokemonDetailsUIState, modifier: Modifier = Modifier) {
     Surface(modifier = modifier) {
-        Column() {
+        Column {
             Text(text = pokemonDetails.name, style = typography.h1)
             Text(text = pokemonDetails.types, style = typography.body1)
             Text(text = pokemonDetails.abilities, style = typography.body1)
