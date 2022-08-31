@@ -50,14 +50,14 @@ fun PokemonListScreen(
     viewModel: PokemonViewModel = hiltViewModel()
 ) {
 //    val pokemonPagingData = viewModel.pokemonFlow
-//    PokemonList(pokemonPagingData)
+//    PokemonListEpoxy(pokemonPagingData)
 
-    val pokemonPagingData = viewModel.pokemonFlow.collectAsLazyPagingItems()
-    PokemonListNotEpoxy(pokemonPagingData)
+    val pokemonPagingItems = viewModel.pokemonFlow.collectAsLazyPagingItems()
+    PokemonListCompose(pokemonPagingItems)
 }
 
 @Composable
-fun PokemonListNotEpoxy(pokemonPagingItems: LazyPagingItems<Pokemon>) {
+fun PokemonListCompose(pokemonPagingItems: LazyPagingItems<Pokemon>) {
     LazyColumn {
         items(pokemonPagingItems, { item: Pokemon -> item.id })
         { pokemon ->
@@ -127,9 +127,8 @@ fun PokemonImage(pokemonImageUrl: String, modifier: Modifier = Modifier) {
     )
 }
 
-
 @Composable
-fun PokemonList(pokemonPagingData: Flow<PagingData<Pokemon>>) {
+fun PokemonListEpoxy(pokemonPagingData: Flow<PagingData<Pokemon>>) {
     val coroutineScope = rememberCoroutineScope()
 
     AndroidView(factory = { ctx ->
