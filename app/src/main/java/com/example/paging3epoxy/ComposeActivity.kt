@@ -19,7 +19,6 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.core.view.setPadding
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
@@ -28,11 +27,10 @@ import coil.compose.AsyncImage
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.example.domain.feature.pokemon.models.Pokemon
 import com.example.paging3epoxy.ui.theme.Paging3EpoxyTheme
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
-@AndroidEntryPoint
 class ComposeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +44,7 @@ class ComposeActivity : ComponentActivity() {
 
 @Composable
 fun PokemonListScreen(
-    viewModel: PokemonViewModel = hiltViewModel()
+    viewModel: PokemonViewModel = koinViewModel()
 ) {
     val pokemonPagingData = viewModel.pokemonFlow
     PokemonListEpoxy(pokemonPagingData)
