@@ -10,8 +10,10 @@ import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.annotation.Named
 import retrofit2.Retrofit
 
+@Named("DefaultDS")
 @OptIn(ExperimentalSerializationApi::class)
 class DefaultPokemonRemoteDataSource : PokemonRemoteDataSource {
     private val url = "https://pokeapi.co/api/v2/"

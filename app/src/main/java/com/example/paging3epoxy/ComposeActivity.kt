@@ -28,17 +28,17 @@ import coil.compose.AsyncImage
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.example.domain.feature.pokemon.models.Pokemon
 import com.example.paging3epoxy.ui.theme.Paging3EpoxyTheme
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class ComposeActivity : ComponentActivity() {
+    private val viewModel: PokemonViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Paging3EpoxyTheme {
-                PokemonListScreen()
+                PokemonListScreen(viewModel)
             }
         }
     }

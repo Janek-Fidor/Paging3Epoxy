@@ -4,11 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.domain.feature.pokemon.PokemonRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import org.koin.android.annotation.KoinViewModel
 
-@HiltViewModel
-class PokemonViewModel @Inject constructor(
+@KoinViewModel
+class PokemonViewModel(
     repository: PokemonRepository
 ) : ViewModel() {
     val pokemonFlow = repository.fetchPokemonPages().cachedIn(viewModelScope)
